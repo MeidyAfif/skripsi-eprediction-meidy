@@ -4,12 +4,13 @@ from PIL import Image
 # --- 1. KONFIGURASI HALAMAN (Wajib di baris pertama) ---
 st.set_page_config(
     page_title="Beranda - E-Prediction Bitcoin",
-    page_icon="🏠",
+    page_icon="💰",
     layout="wide"
 )
 
 # --- 2. SIDEBAR (NAVIGASI & PROFIL) ---
 with st.sidebar:
+    # Ganti URL ini dengan foto aslimu jika ada, atau biarkan icon ini
     st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=100)
     
     st.markdown("""
@@ -23,65 +24,73 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.info("💡 **Tips:** Gunakan menu di samping kiri untuk berpindah halaman.")
+    st.info("💡 **Navigasi:** Pilih menu di atas/samping untuk melihat Data Historis, Training, dan Hasil Prediksi.")
 
 # --- 3. KONTEN UTAMA ---
 
 # Header / Judul Besar
 st.title("💰 E-Prediction Bitcoin")
-st.subheader("Sistem Analisis & Prediksi Aset Kripto sebagai 'Emas Digital'")
+st.subheader("Analisis Komparatif Model LSTM vs ARIMA dalam Konteks 'Emas Digital'")
 st.markdown("---")
 
-# Membagi layar jadi 2 kolom (Kiri: Penjelasan, Kanan: Rangkuman Data)
-col1, col2 = st.columns([2, 1])
+# Membagi layar jadi 2 kolom (Kiri: Penjelasan, Kanan: Scoreboard)
+col1, col2 = st.columns([2, 1], gap="medium")
 
 with col1:
     st.markdown("""
     ### 📌 Latar Belakang Penelitian
-    Selamat datang di Sistem **E-Prediction**. Aplikasi ini dikembangkan sebagai bagian dari Tugas Akhir Skripsi untuk menjawab tantangan investasi di era ekonomi digital yang penuh ketidakpastian.
+    Selamat datang di Sistem **E-Prediction**. Aplikasi ini dikembangkan sebagai visualisasi Tugas Akhir Skripsi untuk menjawab tantangan investasi aset kripto.
     
     **Mengapa Bitcoin?**
-    Bitcoin sering dijuluki sebagai *"Emas Digital"* karena karakteristiknya yang unik sebagai pelindung nilai. Namun, volatilitas harganya yang ekstrem seringkali membuat investor ragu.
+    Bitcoin sering dijuluki sebagai *"Emas Digital"* karena potensinya sebagai pelindung nilai (*store of value*). Namun, volatilitas harganya yang ekstrem menuntut metode prediksi yang presisi.
     
     **Solusi Sistem Ini:**
-    Sistem ini membandingkan kinerja dua metode algoritma canggih untuk membedah pola harga Bitcoin:
-    * **ARIMA (Statistik Klasik):** Mengandalkan pola linear masa lalu untuk prediksi jangka pendek.
-    * **LSTM (Deep Learning):** Menggunakan Jaringan Saraf Tiruan (*Artificial Intelligence*) untuk mempelajari pola non-linear yang kompleks.
+    Sistem ini mempertandingkan dua algoritma populer untuk melihat mana yang paling *robust* menghadapi fluktuasi pasar:
+    * 📈 **ARIMA (Statistical):** Pendekatan linear yang mengandalkan autokorelasi data historis.
+    * 🧠 **LSTM (Deep Learning):** Pendekatan saraf tiruan yang mampu menangkap pola non-linear kompleks.
     """)
     
-    st.success("""
-    🎯 **Tujuan Utama:** Membuktikan secara ilmiah apakah Bitcoin dapat diprediksi dengan akurat, serta memvalidasi hipotesisnya sebagai aset investasi modern yang setara dengan Emas.
+    st.info("""
+    🎯 **Tujuan Utama:** Menentukan model terbaik (*Best Fit*) untuk memprediksi harga Bitcoin dan membuktikan kelayakannya sebagai instrumen investasi modern.
     """)
 
 with col2:
-    st.markdown("### 🔍 Ringkasan Hasil Skripsi")
+    st.markdown("### 🏆 Ringkasan Hasil (Final)")
     
     with st.container(border=True):
-        st.markdown("**1. Dataset Penelitian**")
-        st.caption("Yahoo Finance (Jan 2020 - Des 2024)")
+        st.markdown("##### **Model Terbaik (Champion)**")
+        # Menggunakan st.metric biar terlihat profesional
+        st.metric(
+            label="📈 ARIMA (Statistical)",
+            value="1.77% (MAPE)",
+            delta="Robust / Best Fit",
+            delta_color="normal" # Hijau artinya bagus
+        )
+        st.caption("*Menang karena stabil menangkap tren utama.*")
         
-        st.markdown("**2. Metode AI (Champion)**")
-        st.caption("🧠 **LSTM** (Long Short-Term Memory)")
-        st.caption("• Error Terendah: **3.09%**")
-        st.caption("• Karakter: *Trend Follower*")
+        st.divider()
         
-        st.markdown("**3. Metode Statistik**")
-        st.caption("📈 **ARIMA** (AutoRegressive Integrated Moving Average)")
-        st.caption("• Error Terendah: **1.84%**")
-        st.caption("• Karakter: *High Precision*")
+        st.markdown("##### **Model Pembanding**")
+        st.metric(
+            label="🧠 LSTM (Deep Learning)",
+            value="3.19% (MAPE)",
+            delta="- Overfitting",
+            delta_color="inverse" # Merah artinya warning (kalah/jelek)
+        )
+        st.caption("*Akurat saat latihan, namun bias saat pengujian.*")
 
 # --- 4. PANDUAN NAVIGASI (FOOTER) ---
 st.markdown("---")
-st.markdown("### 🚀 Panduan Menu Aplikasi")
+st.subheader("🚀 Peta Aplikasi")
 
-# Info navigasi biar dosen/pengguna paham isi webnya
+# Info navigasi disesuaikan dengan struktur file kita
 col_a, col_b, col_c = st.columns(3)
 
 with col_a:
-    st.info("📊 **Halaman 1: Data Historis**\n\nLihat bukti nyata korelasi harga antara Bitcoin vs Emas vs IHSG (Validasi Bab 4).")
+    st.success("📊 **Analisis Emas Digital**\n\nLihat bukti korelasi ROI antara Bitcoin, Emas, dan IHSG (Validasi Bab 4).")
 
 with col_b:
-    st.warning("🧪 **Halaman 2: Lab Eksperimen**\n\nIntip dapur rekaman hasil pelatihan model LSTM yang bervariasi (Bukti Sifat Stokastik).")
+    st.warning("⚙️ **Proses Modeling**\n\nTransparansi proses pelatihan data dan parameter yang digunakan.")
 
 with col_c:
-    st.success("🏆 **Halaman 3: Final Dashboard**\n\nLihat hasil prediksi terbaik (Best Model) dan kesimpulan akhir penelitian.")
+    st.error("🏆 **Evaluasi Akhir**\n\nDashboard utama perbandingan grafik prediksi (Actual vs LSTM vs ARIMA) dan tabel error.")
